@@ -1,26 +1,20 @@
- // UI
+// UI
+const numberButtons = document.querySelectorAll(".number")
+const addButton = document.querySelector("#addBtn");
+const subtractButton = document.querySelector("#subtractBtn");
+const divideButton = document.querySelector("#divideBtn");
+const multiplyButton = document.querySelector("#multiplyBtn");
+const pointButton = document.querySelector("#pointBtn");
 
-const one = document.querySelector("#one");
-const two = document.querySelector("#two");
-const three = document.querySelector("#three");
-const four = document.querySelector("#four");
-const five = document.querySelector("#five");
-const six = document.querySelector("#six");
-const seven = document.querySelector("#seven");
-const eight = document.querySelector("#eight");
-const nine = document.querySelector("#nine");
-const zero = document.querySelector("#zero");
+const clearButton = document.querySelector("#clearBtn");
+const deleteButton = document.querySelector("#deleteBtn");
 
-const add = document.querySelector("#add");
-const subtract = document.querySelector("#subtract");
-const divide = document.querySelector("#divide");
-const multiply = document.querySelector("#multiply");
-const point = document.querySelector("#point");
+const currentOperation = document.querySelector("#current-operation");
 
-const clear = document.querySelector("#clear");
-const del = document.querySelector("#delete");
-
-const result = document.querySelector("#operand");
+// Variables for each part of calculator operation
+let firstOperand = 0;
+let operator = 0;
+let secondOperand = 0;
 
 // Basic math operations functions
 
@@ -40,11 +34,6 @@ function multiplication(a,b) {
   return a / b;
  }
 
-// Variables for each part of calculator operation
-let firstOperand = 0;
-let operator = 0;
-let secondOperand = 0;
-
 function operate(){
   let result;
   if(operator == add) {
@@ -60,13 +49,15 @@ function operate(){
   firstOperand = result; 
 }
 
-clear.addEventListener("click", () => {
+
+
+clearButton.addEventListener("click", () => {
   firstOperand = 0;
   operator = 0;
   secondOperand = 0;
 });
 
-del.addEventListener("click", () => {
+deleteButton.addEventListener("click", () => {
   if (secondOperand !== 0) {
     secondOperand = 0;
   } else if(operator !== 0) {

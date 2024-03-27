@@ -83,7 +83,7 @@ button:hover {
   background-color: #242424;
 }
 
-.operand {
+.current-operation {
   font-size: 60px;
   color: white;
 }
