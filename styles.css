@@ -115,3 +115,7 @@ button:hover {
   text-align: right;
   padding-top: 80px;
 }
+
+#currentOperation {
+  word-wrap: break-word;
+}
