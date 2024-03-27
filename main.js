@@ -11,7 +11,7 @@ let operation = "";
 let secondOperand = "";
 let operationResult = "";
 
-//clearButton.addEventListener("click", clear);
+clearButton.addEventListener("click", clear);
 deleteButton.addEventListener("click", deleteLastNumber);
 
 numbersButtons.forEach((button) => {
@@ -31,9 +31,25 @@ resultButton.addEventListener("click", () => {
 })
 
 function deleteLastNumber() {
-  if(currentOperation.textContent != ""){
-    currentOperation.textContent = currentOperation.textContent.slice(0, -1);
+
+    if(firstOperand == "" && secondOperand == "" && operation != "") {
+      currentOperation.textContent = currentOperation.textContent.slice(0, -1);
+      operation = operation.slice(0, -1);
+    } else if (firstOperand != "" && secondOperand == "") {
+      currentOperation.textContent = currentOperation.textContent.slice(0, -1);
+      firstOperand = firstOperand.slice(0, -1);
+    } else if (secondOperand != "" && firstOperand != "") {
+      currentOperation.textContent = currentOperation.textContent.slice(0, -1);
+      secondOperand = secondOperand.slice(0, -1);
+    }
   }
+
+function clear() {
+  currentOperation.textContent = "";
+  firstOperand = "";
+  operation = "";
+  secondOperand = "";
+  operationResult = "";
 }
 
 function addNumber(number) {
@@ -49,7 +65,7 @@ function addNumber(number) {
   } else if(firstOperand !== "" && operation !== "" && secondOperand == ""){
     currentOperation.textContent = number;
     secondOperand = number;
-  } else if(firstOperand !== "" && operation !== "" && secondOperand !== "" && operationResult == ""){
+  } else if(firstOperand !== "" && operation !== "" && secondOperand !== ""){
     currentOperation.textContent += number;
     secondOperand += number;
   }
@@ -87,5 +103,4 @@ function operate(a,b){
   operationResult = result;
   operation = "";
   secondOperand = "";
-
 }
