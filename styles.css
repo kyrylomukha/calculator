@@ -52,7 +52,7 @@ table {
 
  @import url('https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&display=swap');
 
- body {
+body {
   font-family: Helvetica, Roboto;
   font-size: 18px;
   box-sizing: border-box;
@@ -89,7 +89,6 @@ button:hover {
 }
 
 .buttons {
-
   display: grid;
   grid-template-columns: 70px 70px 70px 70px;
   gap: 13px;
@@ -103,11 +102,11 @@ button:hover {
   font-size: 30px;
 }
 
-.operator {
+.operator, .resultBtn {
   background-color: #FF9F0A;
 }
 
-.operator:hover {
+.operator:hover, .resultBtn:hover {
   background-color: #dd8d16;
 }
 

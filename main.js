@@ -1,70 +1,91 @@
-// UI
-const numberButtons = document.querySelectorAll(".number")
-const addButton = document.querySelector("#addBtn");
-const subtractButton = document.querySelector("#subtractBtn");
-const divideButton = document.querySelector("#divideBtn");
-const multiplyButton = document.querySelector("#multiplyBtn");
+const numbersButtons = document.querySelectorAll(".number");
+const operatorsButtons = document.querySelectorAll(".operator");
 const pointButton = document.querySelector("#pointBtn");
-
 const clearButton = document.querySelector("#clearBtn");
 const deleteButton = document.querySelector("#deleteBtn");
+const currentOperation = document.querySelector("#currentOperation");
+const resultButton = document.querySelector("#resultBtn");
 
-const currentOperation = document.querySelector("#current-operation");
+let firstOperand = "";
+let operation = "";
+let secondOperand = "";
+let operationResult = "";
 
-// Variables for each part of calculator operation
-let firstOperand = 0;
-let operator = 0;
-let secondOperand = 0;
+//clearButton.addEventListener("click", clear);
+deleteButton.addEventListener("click", deleteLastNumber);
 
-// Basic math operations functions
-
-function addition(a,b) {
-  return a + b;
- }
-
-function subtraction(a,b) {
-  return a - b;
- }
-
-function multiplication(a,b) {
-  return a * b;
- }
-
- function division(a,b) {
-  return a / b;
- }
-
-function operate(){
-  let result;
-  if(operator == add) {
-    return result = firstOperand + secondOperand;
-  } else if(operator == subtract) {
-    return result = firstOperand - secondOperand;
-  } else if(operator == multiply) {
-    return result = firstOperand * secondOperand;
-  } else if(operator == divide) {
-    return result = firstOperand / secondOperand;
+numbersButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    addNumber(button.textContent)})
   }
+);
 
-  firstOperand = result; 
+operatorsButtons.forEach((operator) => {
+  operator.addEventListener("click", () => {
+    addOperator(operator.textContent)})
+  }
+);
+
+resultButton.addEventListener("click", () => {
+  operate(firstOperand, secondOperand);
+})
+
+function deleteLastNumber() {
+  if(currentOperation.textContent != ""){
+    currentOperation.textContent = currentOperation.textContent.slice(0, -1);
+  }
 }
 
-
-
-clearButton.addEventListener("click", () => {
-  firstOperand = 0;
-  operator = 0;
-  secondOperand = 0;
-});
-
-deleteButton.addEventListener("click", () => {
-  if (secondOperand !== 0) {
-    secondOperand = 0;
-  } else if(operator !== 0) {
-    operator = 0;
-  } else if(firstOperand !== 0) {
-    firstOperand = 0;
+function addNumber(number) {
+  if(firstOperand === "") {
+    currentOperation.textContent = number;
+    firstOperand = number;
+  } else if(firstOperand !== "" && operation == "" && operationResult == "") {
+    currentOperation.textContent += number;
+    firstOperand += number;
+  } else if(firstOperand !== "" && operation == "" && operationResult !== "") {
+    currentOperation.textContent = number;
+    firstOperand = number;
+  } else if(firstOperand !== "" && operation !== "" && secondOperand == ""){
+    currentOperation.textContent = number;
+    secondOperand = number;
+  } else if(firstOperand !== "" && operation !== "" && secondOperand !== "" && operationResult == ""){
+    currentOperation.textContent += number;
+    secondOperand += number;
   }
-});
- 
- 
+}
+
+function addOperator(operator) {
+  if(firstOperand === "") {
+    currentOperation.textContent = operator;
+  } else if (firstOperand !== "" && secondOperand === "") {
+    currentOperation.textContent = operator;
+    operation = operator;
+  } else if(firstOperand !== "" && secondOperand !== ""){
+    operate(firstOperand, secondOperand);
+  }
+}
+
+function operate(a,b){
+  let result;
+  a = +a;
+  b = +b;
+
+  if(operation == "+") {
+    result = a + b;
+  } else if(operation == "-") {
+    result = a - b;
+  } else if(operation == "*") {
+    result = a * b;
+  } else if(operation == "/") {
+    result = a / b;
+  } 
+
+  result.toString();
+  currentOperation.textContent = result;
+  firstOperand = result;
+  operationResult = result;
+  operation = "";
+  secondOperand = "";
+
+}
