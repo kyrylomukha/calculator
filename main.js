@@ -1,6 +1,5 @@
 const numbersButtons = document.querySelectorAll(".number");
 const operatorsButtons = document.querySelectorAll(".operator");
-const pointButton = document.querySelector("#pointBtn");
 const clearButton = document.querySelector("#clearBtn");
 const deleteButton = document.querySelector("#deleteBtn");
 const currentOperation = document.querySelector("#currentOperation");
@@ -16,33 +15,36 @@ deleteButton.addEventListener("click", deleteLastNumber);
 
 numbersButtons.forEach((button) => {
   button.addEventListener("click", () => {
-    addNumber(button.textContent)})
-  }
-);
+    addNumber(button.textContent);
+  });
+});
 
 operatorsButtons.forEach((operator) => {
   operator.addEventListener("click", () => {
-    addOperator(operator.textContent)})
-  }
-);
+    addOperator(operator.textContent);
+  });
+});
 
 resultButton.addEventListener("click", () => {
   operate(firstOperand, secondOperand);
-})
+});
 
 function deleteLastNumber() {
-
-    if(firstOperand == "" && secondOperand == "" && operation != "") {
-      currentOperation.textContent = currentOperation.textContent.slice(0, -1);
-      operation = operation.slice(0, -1);
-    } else if (firstOperand != "" && secondOperand == "") {
-      currentOperation.textContent = currentOperation.textContent.slice(0, -1);
-      firstOperand = firstOperand.slice(0, -1);
-    } else if (secondOperand != "" && firstOperand != "") {
-      currentOperation.textContent = currentOperation.textContent.slice(0, -1);
-      secondOperand = secondOperand.slice(0, -1);
-    }
+  if (firstOperand === operationResult) {
+    firstOperand = "";
+    operationResult = "";
+    currentOperation.textContent = "";
+  } else if (firstOperand == "" && secondOperand == "" && operation != "") {
+    currentOperation.textContent = currentOperation.textContent.slice(0, -1);
+    operation = operation.slice(0, -1);
+  } else if (firstOperand != "" && secondOperand == "") {
+    currentOperation.textContent = currentOperation.textContent.slice(0, -1);
+    firstOperand = firstOperand.slice(0, -1);
+  } else if (secondOperand != "" && firstOperand != "") {
+    currentOperation.textContent = currentOperation.textContent.slice(0, -1);
+    secondOperand = secondOperand.slice(0, -1);
   }
+}
 
 function clear() {
   currentOperation.textContent = "";
@@ -53,49 +55,50 @@ function clear() {
 }
 
 function addNumber(number) {
-  if(firstOperand === "") {
+  if (number == "." && currentOperation.textContent.includes(".")) {
+  } else if (firstOperand === "") {
     currentOperation.textContent = number;
     firstOperand = number;
-  } else if(firstOperand !== "" && operation == "" && operationResult == "") {
+  } else if (firstOperand !== "" && operation == "" && operationResult == "") {
     currentOperation.textContent += number;
     firstOperand += number;
-  } else if(firstOperand !== "" && operation == "" && operationResult !== "") {
+  } else if (firstOperand !== "" && operation == "" && operationResult !== "") {
     currentOperation.textContent = number;
     firstOperand = number;
-  } else if(firstOperand !== "" && operation !== "" && secondOperand == ""){
+  } else if (firstOperand !== "" && operation !== "" && secondOperand == "") {
     currentOperation.textContent = number;
     secondOperand = number;
-  } else if(firstOperand !== "" && operation !== "" && secondOperand !== ""){
+  } else if (firstOperand !== "" && operation !== "" && secondOperand !== "") {
     currentOperation.textContent += number;
     secondOperand += number;
   }
 }
 
 function addOperator(operator) {
-  if(firstOperand === "") {
+  if (firstOperand === "") {
     currentOperation.textContent = operator;
   } else if (firstOperand !== "" && secondOperand === "") {
     currentOperation.textContent = operator;
     operation = operator;
-  } else if(firstOperand !== "" && secondOperand !== ""){
+  } else if (firstOperand !== "" && secondOperand !== "") {
     operate(firstOperand, secondOperand);
   }
 }
 
-function operate(a,b){
+function operate(a, b) {
   let result;
   a = +a;
   b = +b;
 
-  if(operation == "+") {
+  if (operation == "+") {
     result = a + b;
-  } else if(operation == "-") {
+  } else if (operation == "-") {
     result = a - b;
-  } else if(operation == "*") {
+  } else if (operation == "*") {
     result = a * b;
-  } else if(operation == "/") {
+  } else if (operation == "/") {
     result = a / b;
-  } 
+  }
 
   result.toString();
   currentOperation.textContent = result;
