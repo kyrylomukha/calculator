@@ -22,27 +22,58 @@ const del = document.querySelector("#delete");
 
 const result = document.querySelector("#operand");
 
+// Basic math operations functions
 
- function addition(a,b) {
+function addition(a,b) {
   return a + b;
  }
 
-  function subtraction(a,b) {
+function subtraction(a,b) {
   return a - b;
  }
 
-  function multiplication(a,b) {
+function multiplication(a,b) {
   return a * b;
  }
 
-  function division(a,b) {
+ function division(a,b) {
   return a / b;
  }
 
+// Variables for each part of calculator operation
+let firstOperand = 0;
+let operator = 0;
+let secondOperand = 0;
 
-/*one.addEventListener("click", () => {
-  result.textContent = "1";
- }); */
- 
+function operate(){
+  let result;
+  if(operator == add) {
+    return result = firstOperand + secondOperand;
+  } else if(operator == subtract) {
+    return result = firstOperand - secondOperand;
+  } else if(operator == multiply) {
+    return result = firstOperand * secondOperand;
+  } else if(operator == divide) {
+    return result = firstOperand / secondOperand;
+  }
+
+  firstOperand = result; 
+}
+
+clear.addEventListener("click", () => {
+  firstOperand = 0;
+  operator = 0;
+  secondOperand = 0;
+});
+
+del.addEventListener("click", () => {
+  if (secondOperand !== 0) {
+    secondOperand = 0;
+  } else if(operator !== 0) {
+    operator = 0;
+  } else if(firstOperand !== 0) {
+    firstOperand = 0;
+  }
+});
  
  
