@@ -82,6 +82,7 @@ function addOperator(operator) {
     operation = operator;
   } else if (firstOperand !== "" && secondOperand !== "") {
     operate(firstOperand, secondOperand);
+    operation = operator; 
   }
 }
 
